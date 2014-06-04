@@ -13,8 +13,6 @@
 #import "BPAlbum.h"
 #import "BPPhoto.h"
 
-#import "BPOtherCollectionViewController.h"
-
 static NSString * const PhotoCellIdentifier = @"PhotoCell";
 static NSString * const AlbumTitleIdentifier = @"AlbumTitle";
 

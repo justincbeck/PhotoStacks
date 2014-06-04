@@ -26,7 +26,6 @@
 		98811DF8193EB29B00124EEC /* BPAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 98811DF5193EB29B00124EEC /* BPAlbum.m */; };
 		98811DF9193EB29B00124EEC /* BPPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 98811DF7193EB29B00124EEC /* BPPhoto.m */; };
 		98811DFC193EBFAB00124EEC /* BPAlbumTitleReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 98811DFB193EBFAB00124EEC /* BPAlbumTitleReusableView.m */; };
-		98811DFF193EC48A00124EEC /* BPOtherCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98811DFE193EC48A00124EEC /* BPOtherCollectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,8 +68,6 @@
 		98811DF7193EB29B00124EEC /* BPPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPPhoto.m; sourceTree = "<group>"; };
 		98811DFA193EBFAB00124EEC /* BPAlbumTitleReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPAlbumTitleReusableView.h; sourceTree = "<group>"; };
 		98811DFB193EBFAB00124EEC /* BPAlbumTitleReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPAlbumTitleReusableView.m; sourceTree = "<group>"; };
-		98811DFD193EC48A00124EEC /* BPOtherCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPOtherCollectionViewController.h; sourceTree = "<group>"; };
-		98811DFE193EC48A00124EEC /* BPOtherCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPOtherCollectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,8 +132,6 @@
 				9836D3ED193E5D980013E96F /* Main.storyboard */,
 				9836D3F0193E5D980013E96F /* BPCollectionViewController.h */,
 				9836D3F1193E5D980013E96F /* BPCollectionViewController.m */,
-				98811DFD193EC48A00124EEC /* BPOtherCollectionViewController.h */,
-				98811DFE193EC48A00124EEC /* BPOtherCollectionViewController.m */,
 				9836D3F3193E5D980013E96F /* Images.xcassets */,
 				9836D3E2193E5D980013E96F /* Supporting Files */,
 				9836D410193E5E580013E96F /* BPPhotoAlbumLayout.h */,
@@ -285,7 +280,6 @@
 				9836D3EC193E5D980013E96F /* BPAppDelegate.m in Sources */,
 				9836D412193E5E580013E96F /* BPPhotoAlbumLayout.m in Sources */,
 				9836D3E8193E5D980013E96F /* main.m in Sources */,
-				98811DFF193EC48A00124EEC /* BPOtherCollectionViewController.m in Sources */,
 				98811DF9193EB29B00124EEC /* BPPhoto.m in Sources */,
 				9836D415193E5F4B0013E96F /* BPPhotoAlbumCell.m in Sources */,
 				98811DF8193EB29B00124EEC /* BPAlbum.m in Sources */,
