@@ -21,7 +21,7 @@
 {
     if (self = [super init])
     {
-        self.imageURL = imageURL;
+        [self setImageURL:imageURL];
     }
     
     return self;

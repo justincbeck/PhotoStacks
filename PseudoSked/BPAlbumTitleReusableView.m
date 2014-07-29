@@ -20,16 +20,16 @@
 {
     if (self = [super initWithFrame:frame])
     {
-        self.titleLabel = [[UILabel alloc] initWithFrame:self.bounds];
-        self.titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.titleLabel.backgroundColor = [UIColor clearColor];
-        self.titleLabel.textAlignment = NSTextAlignmentCenter;
-        self.titleLabel.font = [UIFont boldSystemFontOfSize:13.0f];
-        self.titleLabel.textColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
-        self.titleLabel.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
-        self.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+        [self setTitleLabel:[[UILabel alloc] initWithFrame:self.bounds]];
+        [[self titleLabel] setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+        [[self titleLabel] setBackgroundColor:[UIColor clearColor]];
+        [[self titleLabel] setTextAlignment:NSTextAlignmentCenter];
+        [[self titleLabel] setFont:[UIFont boldSystemFontOfSize:13.0f]];
+        [[self titleLabel] setTextColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
+        [[self titleLabel] setShadowColor:[UIColor colorWithWhite:0.0f alpha:0.3f]];
+        [[self titleLabel] setShadowOffset:CGSizeMake(0.0f, 1.0f)];
         
-        [self addSubview:self.titleLabel];
+        [self addSubview:[self titleLabel]];
     }
     
     return self;
@@ -39,7 +39,7 @@
 {
     [super prepareForReuse];
     
-    self.titleLabel.text = nil;
+    [[self titleLabel] setText:nil];
 }
 
 /*

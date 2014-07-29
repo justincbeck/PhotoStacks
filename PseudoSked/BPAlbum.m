@@ -21,7 +21,7 @@
 
 - (NSArray *)photos
 {
-    return [self.mutablePhotos copy];
+    return [[self mutablePhotos] copy];
 }
 
 

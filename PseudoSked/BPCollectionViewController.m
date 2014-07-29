@@ -60,8 +60,8 @@ static NSString * const AlbumTitleIdentifier = @"AlbumTitle";
         [self.albums addObject:album];
     }
     
-    self.thumbnailQueue = [[NSOperationQueue alloc] init];
-    self.thumbnailQueue.maxConcurrentOperationCount = 3;
+    [self setThumbnailQueue:[[NSOperationQueue alloc] init]];
+    [[self thumbnailQueue] setMaxConcurrentOperationCount:3];
     
     [self.collectionView registerClass:[BPAlbumTitleReusableView class]
             forSupplementaryViewOfKind:BHPhotoAlbumLayoutAlbumTitleKind
@@ -76,22 +76,22 @@ static NSString * const AlbumTitleIdentifier = @"AlbumTitle";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return self.albums.count;
+    return [[self albums] count];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    BPAlbum *album = self.albums[section];
+    BPAlbum *album = [[self albums] objectAtIndex:section];
     
-    return album.photos.count;
+    return [[album photos] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     BPPhotoAlbumCell *photoCell = [collectionView dequeueReusableCellWithReuseIdentifier:PhotoCellIdentifier forIndexPath:indexPath];
     
-    BPAlbum *album = self.albums[indexPath.section];
-    BPPhoto *photo = album.photos[indexPath.item];
+    BPAlbum *album = [[self albums] objectAtIndex:[indexPath section]];
+    BPPhoto *photo = [[album photos] objectAtIndex:[indexPath item]];
     
     __weak BPCollectionViewController *weakSelf = self;
     
@@ -100,10 +100,10 @@ static NSString * const AlbumTitleIdentifier = @"AlbumTitle";
         UIImage *image = [photo image];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            if ([weakSelf.collectionView.indexPathsForVisibleItems containsObject:indexPath]) {
-                BPPhotoAlbumCell *cell =
-                (BPPhotoAlbumCell *)[weakSelf.collectionView cellForItemAtIndexPath:indexPath];
-                cell.imageView.image = image;
+            if ([[[weakSelf collectionView] indexPathsForVisibleItems] containsObject:indexPath])
+            {
+                BPPhotoAlbumCell *cell = (BPPhotoAlbumCell *)[[weakSelf collectionView] cellForItemAtIndexPath:indexPath];
+                [[cell imageView] setImage:image];
             }
         });
         
@@ -111,7 +111,7 @@ static NSString * const AlbumTitleIdentifier = @"AlbumTitle";
     
     operation.queuePriority = (indexPath.item == 0) ? NSOperationQueuePriorityHigh : NSOperationQueuePriorityNormal;
     
-    [self.thumbnailQueue addOperation:operation];
+    [[self thumbnailQueue] addOperation:operation];
     
     return photoCell;
 }
@@ -138,17 +138,15 @@ static NSString * const AlbumTitleIdentifier = @"AlbumTitle";
 {
     if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation))
     {
-        [[self photoAlbumLayout] setNumberOfColumns:3];
-        
         CGFloat sideInset = [UIScreen mainScreen].preferredMode.size.width == 1136.0f ? 45.0f : 25.0f;
         
-        self.photoAlbumLayout.itemInsets = UIEdgeInsetsMake(22.0f, sideInset, 13.0f, sideInset);
+        [[self photoAlbumLayout] setNumberOfColumns:3];
+        [[self photoAlbumLayout] setItemInsets:UIEdgeInsetsMake(22.0f, sideInset, 13.0f, sideInset)];
     }
     else
     {
-        self.photoAlbumLayout.numberOfColumns = 2;
-        
-        self.photoAlbumLayout.itemInsets = UIEdgeInsetsMake(22.0f, 22.0f, 13.0f, 22.0f);
+        [[self photoAlbumLayout] setNumberOfColumns:2];
+        [[self photoAlbumLayout] setItemInsets:UIEdgeInsetsMake(22.0f, 22.0f, 13.0f, 22.0f)];
     }
 }
 

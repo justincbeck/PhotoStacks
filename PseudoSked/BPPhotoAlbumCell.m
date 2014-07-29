@@ -32,11 +32,11 @@
         self.layer.rasterizationScale = [UIScreen mainScreen].scale;
         self.layer.shouldRasterize = YES;
         
-        self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.imageView.clipsToBounds = YES;
+        [self setImageView:[[UIImageView alloc] initWithFrame:self.bounds]];
+        [[self imageView] setContentMode:UIViewContentModeScaleAspectFill];
+        [[self imageView] setClipsToBounds:YES];
         
-        [self.contentView addSubview:self.imageView];
+        [[self contentView] addSubview:[self imageView]];
     }
     
     return self;
@@ -46,7 +46,7 @@
 {
     [super prepareForReuse];
     
-    self.imageView.image = nil;
+    [[self imageView] setImage:nil];
 }
 
 /*

@@ -61,9 +61,10 @@ static NSUInteger const PhotoCellBaseZIndex = 100;
     {
         CGFloat newPercentage = 0.0f;
         
-        do
-        {
+        do {
+            
             newPercentage = ((CGFloat)(arc4random() % 220) - 110) * 0.0001f;
+            
         } while (fabsf(percentage - newPercentage) < 0.006);
         
         percentage = newPercentage;
@@ -74,7 +75,7 @@ static NSUInteger const PhotoCellBaseZIndex = 100;
         [rotations addObject:[NSValue valueWithCATransform3D:transform]];
     }
     
-    self.rotations = rotations;
+    [self setRotations:rotations];
 }
 
 - (void)prepareLayout
@@ -125,7 +126,7 @@ static NSUInteger const PhotoCellBaseZIndex = 100;
     NSInteger row = indexPath.section / [self numberOfColumns];
     NSInteger column = indexPath.section % self.numberOfColumns;
     
-    CGFloat spacingX = self.collectionView.bounds.size.width - [self itemInsets].left - [self itemInsets].right - ([self numberOfColumns] * [self itemSize].width);
+    CGFloat spacingX = [[self collectionView] bounds].size.width - [self itemInsets].left - [self itemInsets].right - ([self numberOfColumns] * [self itemSize].width);
     
     if ([self numberOfColumns] > 1) spacingX = spacingX / ([self numberOfColumns] - 1);
     
@@ -139,7 +140,7 @@ static NSUInteger const PhotoCellBaseZIndex = 100;
 {
     CGRect frame = [self frameForAlbumPhotoAtIndexPath:indexPath];
     frame.origin.y += frame.size.height;
-    frame.size.height = self.titleHeight;
+    frame.size.height = [self titleHeight];
     
     return frame;
 }
@@ -164,14 +165,12 @@ static NSUInteger const PhotoCellBaseZIndex = 100;
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewLayoutAttributes *attributes = self.layoutInfo[BPPhotoAlbumLayoutPhotoCellKind][indexPath];
-    
-    return attributes;
+    return [[[self layoutInfo] objectForKey:BPPhotoAlbumLayoutPhotoCellKind] objectForKey:indexPath];
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    return [self layoutInfo][BHPhotoAlbumLayoutAlbumTitleKind][indexPath];
+    return [[[self layoutInfo] objectForKey:BHPhotoAlbumLayoutAlbumTitleKind] objectForKey:indexPath];
 }
 
 - (CGSize)collectionViewContentSize
@@ -193,6 +192,7 @@ static NSUInteger const PhotoCellBaseZIndex = 100;
 - (CATransform3D)transformForAlbumPhotoAtIndex:(NSIndexPath *)indexPath
 {
     NSInteger offset = (indexPath.section * RotationStride + indexPath.item);
+    
     return [[self rotations][offset % RotationCount] CATransform3DValue];
 }
 
